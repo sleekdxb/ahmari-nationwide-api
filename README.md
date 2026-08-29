@@ -4,7 +4,9 @@
 
 ### A Canadian, business-to-consumer (B2C) web platform that allows a car dealership to showcase its vehicle inventory online.
 
-[Write a concise and professional description explaining the purpose of the platform, target users, and core business value.]
+Customers can browse, search and filter listed vehicles by (make, model, year, price, mileadge, body type, transmision, fuel type and more)
+with full details, pricing, images and availability status. it's more of lean geneartion and inventory display platform, every listed vehicel 
+leads the customer to conatct dealership via phone call or whatsApp
 
 <br/>
 
