@@ -12,13 +12,13 @@ leads the customer to conatct dealership via phone call or whatsApp
 
 <!-- Core Badges -->
 
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge)
-![Build](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Platform](https://img.shields.io/badge/Platform-Web%20%7C%20Mobile%20%7C%20API-lightgrey?style=for-the-badge)
-![Architecture](https://img.shields.io/badge/Architecture-Scalable-orange?style=for-the-badge)
-![Documentation](https://img.shields.io/badge/Documentation-Maintained-blueviolet?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-v0.1.0-blue?style=for-the-badge)
+![Build](https://img.shields.io/badge/Build-Not%20Available-lightgrey?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Web%20%7C%20API-lightgrey?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-MVC-orange?style=for-the-badge)
+![Documentation](https://img.shields.io/badge/Documentation-In%20Progress-blueviolet?style=for-the-badge)
 
 <br/>
 <br/>
