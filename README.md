@@ -27,14 +27,15 @@ leads the customer to conatct dealership via phone call or whatsApp
 
 <!-- Replace or extend based on actual technologies -->
 
-![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=flat-square&logo=react&logoColor=white)
-![Next.js](https://img.shields.io/badge/Framework-Next.js-black?style=flat-square&logo=next.js)
-![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
-![NestJS](https://img.shields.io/badge/Framework-NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/DevOps-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![GitHub_Actions](https://img.shields.io/badge/CI/CD-GitHub%20Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
+![Laravel](https://img.shields.io/badge/Backend-Laravel-FF2D20?style=flat-square\&logo=laravel\&logoColor=white)
+![PHP](https://img.shields.io/badge/Language-PHP-777BB4?style=flat-square\&logo=php\&logoColor=white)
+![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=flat-square\&logo=react\&logoColor=white)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?style=flat-square\&logo=typescript\&logoColor=white)
+![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?style=flat-square\&logo=mysql\&logoColor=white)
+![REST API](https://img.shields.io/badge/API-REST-02569B?style=flat-square)
+![PHPUnit](https://img.shields.io/badge/Testing-PHPUnit-3C873A?style=flat-square\&logo=php\&logoColor=white)
+
+
 
 </div>
 
