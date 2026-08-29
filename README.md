@@ -85,8 +85,8 @@ This repository contains the source code, technical documentation, deployment co
 | Application | Description | Status |
 |---|---|---|
 | ![Web](https://img.shields.io/badge/Web-Application-blue?style=flat-square) | [Describe web application purpose] | ![Active](https://img.shields.io/badge/Status-Active-success?style=flat-square) |
-| ![Mobile](https://img.shields.io/badge/Mobile-Application-green?style=flat-square) | [not required at this time] | ![NON](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square) |
-| ![Backend](https://img.shields.io/badge/Backend-API-orange?style=flat-square) | [Describe backend/API purpose] | ![In Progress](https://img.shields.io/badge/Status-Active-success?style=flat-square) |
+| ![Mobile](https://img.shields.io/badge/Mobile-Application-green?style=flat-square) | [not required at this time] | ![NON](https://img.shields.io/badge/Status-NON-lightgrey?style=flat-square)) |
+| ![Backend](https://img.shields.io/badge/Backend-API-orange?style=flat-square) | [Describe backend/API purpose] | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)) |
 | ![Admin](https://img.shields.io/badge/Admin-Dashboard-purple?style=flat-square) | [Allows the dealership to manage and publich invetory] | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey?style=flat-square) |
 
 > Replace placeholders with actual application names, descriptions, and statuses.
