@@ -2,7 +2,7 @@
 
 # Ahmari Nationwide Auto Sales
 
-### [Professional Project Tagline]
+### A Canadian, business-to-consumer (B2C) web platform that allows a car dealership to showcase its vehicle inventory online.
 
 [Write a concise and professional description explaining the purpose of the platform, target users, and core business value.]
 
