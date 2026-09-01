@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
-
+use App\Http\Controllers\AdminAuthController;
 
 Route::prefix('vehicle')->group(function () {
     Route::post('/addVehicle', [VehicleController::class, 'addVehicle']);
@@ -16,12 +16,14 @@ Route::prefix('vehicle')->group(function () {
 
 
 Route::prefix('media')->group(function () {
-    Route::post('/fileUpload', [VehicleController::class, 'fileUpload']);
+    Route::post('/vehicleFileUpload', [VehicleController::class, 'vehicleFileUpload']);
 });
 
+
 Route::prefix('adminAuth')->group(function () {
-    Route::post('/login', [VehicleController::class, 'login']);
-    Route::post('/addStaff', [VehicleController::class, 'addStaff']);
+    Route::post('/addStaff', [AdminAuthController::class, 'addStaff']);
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    Route::delete('/logout', [AdminAuthController::class, 'logout']);
 });
 
 

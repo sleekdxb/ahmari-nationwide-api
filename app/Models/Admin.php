@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -16,6 +17,8 @@ class Admin extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'state_id',
+        'hashed_email',
         'password',
     ];
 
@@ -31,4 +34,30 @@ class Admin extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the identifier that will be stored in the JWT subject claim.
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->admin_id;
+    }
+
+    /**
+     * Get custom claims for the JWT.
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function currentState()
+    {
+        return $this->hasOne(
+            AdminStatus::class,
+            'state_id',
+            'state_id'
+        );
+    }
 }
+
