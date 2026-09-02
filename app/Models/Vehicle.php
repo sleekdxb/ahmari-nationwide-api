@@ -11,6 +11,7 @@ class Vehicle extends Model
 
     protected $fillable = [
         'veh_id',
+        'admin_id',
         'stock_number',
         'vin',
         'year',

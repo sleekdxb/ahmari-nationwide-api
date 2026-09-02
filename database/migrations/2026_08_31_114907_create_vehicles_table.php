@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('veh_id', 255)->unique();
             $table->string('stock_number', 255)->unique();
             $table->string('vin', 255)->unique();
-
+            $table->string('admin_id', 255);
             // Vehicle information
             $table->unsignedSmallInteger('year');
             $table->string('make', 255);

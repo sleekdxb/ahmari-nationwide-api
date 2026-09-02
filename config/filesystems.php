@@ -37,11 +37,22 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'hostinger' => [
+            'driver' => 'ftp',
+            'host' => '178.16.134.117',
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'root' => env('ROOT_PATH', '/public_html/Ahmari_Nationwide/Files/'),
+            'port' => 21,
+            'passive' => true,
+            'ssl' => false,
+            'timeout' => 30,
+        ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

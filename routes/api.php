@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
@@ -16,7 +17,7 @@ Route::prefix('vehicle')->group(function () {
 
 
 Route::prefix('media')->group(function () {
-    Route::post('/vehicleFileUpload', [VehicleController::class, 'vehicleFileUpload']);
+    Route::post('/vehicleFileUpload', [MediaController::class, 'vehicleFileUpload']);
 });
 
 
