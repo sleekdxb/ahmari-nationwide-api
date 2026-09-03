@@ -70,10 +70,12 @@ class VehicleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'admin_id' => 'required|string|exists:admins,admin_id',
-            'vin' => 'required|string',
-            'year' => 'required|integer',
-            'make' => 'required|string',
-            'model' => 'required|string',
+            'veh_id' => 'required|string|exists:vehicles,veh_id',
+
+            'vin' => 'nullable|string',
+            'year' => 'nullable|integer',
+            'make' => 'nullable|string',
+            'model' => 'nullable|string',
             'trim' => 'nullable|string',
             'condition' => 'nullable|string',
             'body_type' => 'nullable|string',
@@ -89,7 +91,6 @@ class VehicleController extends Controller
             'location' => 'nullable|string',
             'price' => 'nullable|numeric|min:0',
             'description' => 'nullable|string',
-            'init_state' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -99,7 +100,7 @@ class VehicleController extends Controller
             ], 422);
         }
 
-        return VehicleHelper::addVehicle($request);
+        return VehicleHelper::updateVehicle($request);
     }
 
 
