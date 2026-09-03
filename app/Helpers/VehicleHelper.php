@@ -91,4 +91,48 @@ class VehicleHelper
             ], 500);
         }
     }
+
+
+    public static function setVehicleStatus(Request $request): JsonResponse
+    {
+        return DB::transaction(function () use ($request) {
+
+            $stateId = 'STATE' . str_pad(
+                (string) random_int(0, 99999999),
+                8,
+                '0',
+                STR_PAD_LEFT
+            );
+
+            // Create vehicle status
+            $vehicleStatus = VehicleStatus::create([
+                'state_id' => $stateId,
+                'veh_id' => $request->veh_id,
+                'name' => $request->status,
+            ]);
+
+            // Update vehicle's state_id
+            $vehicle = Vehicle::where('veh_id', $request->veh_id)->first();
+
+            if (!$vehicle) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Vehicle not found.'
+                ], 404);
+            }
+
+            $vehicle->state_id = $stateId;
+            $vehicle->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Vehicle status updated successfully.',
+                'data' => [
+                    'state_id' => $stateId,
+                    'veh_id' => $vehicle->veh_id,
+                    'status' => $vehicleStatus->name,
+                ]
+            ], 200);
+        });
+    }
 }
