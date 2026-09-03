@@ -135,4 +135,58 @@ class VehicleHelper
             ], 200);
         });
     }
+
+
+
+    public static function updateVehicle(Request $request)
+    {
+        $vehicle = Vehicle::where('veh_id', $request->veh_id)->first();
+
+        if (!$vehicle) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vehicle not found'
+            ], 404);
+        }
+
+        $fields = [
+            'vin',
+            'year',
+            'make',
+            'model',
+            'trim',
+            'condition',
+            'body_type',
+            'transmission',
+            'fuel_type',
+            'mileage',
+            'engine',
+            'drivetrain',
+            'exterior_color',
+            'interior_color',
+            'doors',
+            'seats',
+            'location',
+            'price',
+            'description',
+        ];
+
+        $updateData = [];
+
+        foreach ($fields as $field) {
+            if ($request->has($field) && $request->input($field) !== null) {
+                $updateData[$field] = $request->input($field);
+            }
+        }
+
+        if (!empty($updateData)) {
+            $vehicle->update($updateData);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vehicle updated successfully',
+            'data' => $vehicle->fresh()
+        ]);
+    }
 }
