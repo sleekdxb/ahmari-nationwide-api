@@ -8,6 +8,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\VehicleFile;
+use App\Models\VehicleFileStatus;
+use Illuminate\Support\Facades\Storage;
+
+
+
 use Log;
 
 
@@ -188,5 +194,67 @@ class VehicleHelper
             'message' => 'Vehicle updated successfully',
             'data' => $vehicle->fresh()
         ]);
+    }
+
+
+
+    public static function deleteVehicle(Request $request)
+    {
+        $vehicle = Vehicle::where('veh_id', $request->veh_id)->first();
+
+        if (!$vehicle) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vehicle not found'
+            ], 404);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Get all vehicle files before deleting them
+            $vehicleFiles = VehicleFile::where('veh_id', $request->veh_id)->get();
+
+            foreach ($vehicleFiles as $file) {
+                // Delete file from storage
+                if (!empty($file->file_path)) {
+                    Storage::delete($file->file_path);
+                } elseif (!empty($file->file_url)) {
+                    $filePath = parse_url($file->file_url, PHP_URL_PATH);
+
+                    if ($filePath) {
+                        Storage::delete(ltrim($filePath, '/'));
+                    }
+                }
+
+                // Delete file statuses
+                VehicleFileStatus::where('file_id', $file->file_id)->delete();
+
+                // Delete vehicle file record
+                $file->delete();
+            }
+
+            // Delete vehicle statuses
+            VehicleStatus::where('veh_id', $request->veh_id)->delete();
+
+            // Delete vehicle
+            $vehicle->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Vehicle deleted successfully'
+            ]);
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete vehicle',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

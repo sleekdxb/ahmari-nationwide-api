@@ -104,4 +104,21 @@ class VehicleController extends Controller
     }
 
 
+
+    public function deleteVehicle(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'admin_id' => 'required|string|exists:admins,admin_id',
+            'veh_id' => 'required|string|exists:vehicles,veh_id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        return VehicleHelper::deleteVehicle($request);
+    }
 }
