@@ -42,4 +42,25 @@ class Vehicle extends Model
         'seats' => 'integer',
         'price' => 'decimal:2',
     ];
+
+
+    public function files()
+    {
+        return $this->hasMany(
+            VehicleFile::class,
+            'veh_id',
+            'veh_id'
+        );
+    }
+
+
+
+    public function currentState()
+    {
+        return $this->hasOne(
+            VehicleStatus::class,
+            'state_id',
+            'state_id'
+        );
+    }
 }
