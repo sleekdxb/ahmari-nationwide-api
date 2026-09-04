@@ -269,6 +269,78 @@ class VehicleHelper
 
 
 
+    public static function getVehicleInventory(Request $request): JsonResponse
+    {
+        $perPage = (int) $request->input('per_page', 15);
+        $page = (int) $request->input('page', 1);
+
+        $filters = [
+            'vin',
+            'year',
+            'make',
+            'model',
+            'trim',
+            'condition',
+            'body_type',
+            'transmission',
+            'fuel_type',
+            'mileage',
+            'engine',
+            'drivetrain',
+            'exterior_color',
+            'interior_color',
+            'doors',
+            'seats',
+            'location',
+            'price',
+            'description',
+        ];
+
+        $vehicle = Vehicle::with([
+            'currentState',
+            'files',
+        ]);
+
+        foreach ($filters as $filter) {
+            $value = $request->input($filter);
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            $vehicle->when(
+                in_array($filter, [
+                    'year',
+                    'mileage',
+                    'doors',
+                    'seats',
+                    'price',
+                ]),
+                fn($query) => $query->where($filter, $value),
+
+                fn($query) => $query->where(
+                    $filter,
+                    'LIKE',
+                    '%' . $value . '%'
+                )
+            );
+        }
+
+        $vehicles = $vehicle
+            ->latest()
+            ->paginate(
+                perPage: $perPage,
+                page: $page
+            );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vehicles retrieved successfully',
+            'data' => $vehicles,
+        ]);
+    }
+
+
     public static function deleteVehicle(Request $request)
     {
         $vehicle = Vehicle::where('veh_id', $request->veh_id)->first();
