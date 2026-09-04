@@ -12,9 +12,13 @@ Route::prefix('vehicle')->group(function () {
     Route::put('/setVehicleStatus', [VehicleController::class, 'setVehicleStatus']);
     Route::delete('/deleteVehicle', [VehicleController::class, 'deleteVehicle']);
     Route::get('/filterVehicle', [VehicleController::class, 'filterVehicle']);
-    Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
+
 });
 
+
+Route::prefix('admin')->group(function () {
+    Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
+});
 
 Route::prefix('media')->group(function () {
     Route::post('/vehicleFileUpload', [MediaController::class, 'vehicleFileUpload']);
