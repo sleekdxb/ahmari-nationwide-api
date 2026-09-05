@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CtaInteractionController;
+use App\Http\Controllers\InquiryController;
 
 Route::prefix('vehicle')->group(function () {
     Route::post('/addVehicle', [VehicleController::class, 'addVehicle']);
@@ -27,6 +28,10 @@ Route::prefix('media')->group(function () {
 
 Route::prefix('cta-interaction')->group(function () {
     Route::post('/setInteraction', [CtaInteractionController::class, 'setInteraction']);
+});
+
+Route::prefix('inquiry')->group(function () {
+    Route::post('/addInquiry', [InquiryController::class, 'addInquiry']);
 });
 
 
