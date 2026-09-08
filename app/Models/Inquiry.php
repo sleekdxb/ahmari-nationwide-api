@@ -14,6 +14,7 @@ class Inquiry extends Model
         'name',
         'phone_number',
         'email',
+        'state_id',
         'message',
     ];
 
@@ -25,5 +26,15 @@ class Inquiry extends Model
         'email' => 'string',
         'message' => 'string',
     ];
+
+    public function currentState()
+    {
+        return $this->hasOne(
+            InquiryStatus::class,
+            'state_id',
+            'state_id'
+        );
+    }
+
 }
 

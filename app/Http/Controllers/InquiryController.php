@@ -29,4 +29,22 @@ class InquiryController extends Controller
 
         return InquiryHelper::addInquiry($request);
     }
+
+    public function getInquiriesAdmin(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'admin_id' => 'required|string|exists:admins,admin_id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        return InquiryHelper::getInquiriesAdmin($request);
+    }
+
+
 }

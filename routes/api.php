@@ -22,6 +22,7 @@ Route::prefix('vehicle')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
     Route::get('/getAdminDashboardOverview', [AdminController::class, 'getAdminDashboardOverview']);
+    Route::get('/getInquiriesAdmin', [InquiryController::class, 'getInquiriesAdmin']);
 });
 
 Route::prefix('media')->group(function () {
