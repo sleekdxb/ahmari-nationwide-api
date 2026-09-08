@@ -63,4 +63,17 @@ class Vehicle extends Model
             'state_id'
         );
     }
+
+
+    public function engagements()
+    {
+        return $this->hasMany(
+            CtaInteraction::class,
+            'veh_id',
+            'veh_id'
+        );
+    }
+
+
+
 }

@@ -22,6 +22,7 @@ class CtaInteractionHelper
             $validated = $request->validate([
                 'veh_id' => ['required', 'string'],
                 'cta_type' => ['required', 'string'],
+                'source' => ['required', 'string'],
             ]);
 
             $vehicle = Vehicle::where('veh_id', $validated['veh_id'])->first();
@@ -39,6 +40,7 @@ class CtaInteractionHelper
                 'cta_id' => $ctaId,
                 'veh_id' => $vehicle->veh_id,
                 'cta_type' => $validated['cta_type'],
+                'source' => $validated['source'],
                 'acted_at' => now(),
             ]);
 
@@ -52,6 +54,7 @@ class CtaInteractionHelper
             Log::error('Failed to set CTA interaction', [
                 'veh_id' => $request->veh_id,
                 'cta_type' => $request->cta_type,
+                'source' => $request->source,
                 'error' => $e->getMessage(),
             ]);
 

@@ -17,6 +17,7 @@ class CtaInteractionController extends Controller
         $validator = Validator::make($request->all(), [
             'veh_id' => 'required|string|exists:vehicles,veh_id',
             'cta_type' => 'required|string',
+            'source' => 'required|string',
         ]);
 
         if ($validator->fails()) {

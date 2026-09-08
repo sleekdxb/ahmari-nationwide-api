@@ -14,6 +14,7 @@ class CtaInteraction extends Model
         'veh_id',
         'cta_type',
         'acted_at',
+        'source',
     ];
 
     protected $casts = [
