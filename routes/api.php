@@ -7,6 +7,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CtaInteractionController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\AdminController;
 
 Route::prefix('vehicle')->group(function () {
     Route::post('/addVehicle', [VehicleController::class, 'addVehicle']);
@@ -20,6 +21,7 @@ Route::prefix('vehicle')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
+    Route::get('/getAdminDashboardOverview', [AdminController::class, 'getAdminDashboardOverview']);
 });
 
 Route::prefix('media')->group(function () {

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('cta_id', 225)->index();
             $table->foreignId('veh_id')->nullable()->constrained('vehicles')->nullOnDelete();
             $table->string('cta_type');
+            $table->string('source');
             $table->timestamp('acted_at')->useCurrent();
             $table->timestamps();
             $table->index(['client_id', 'cta_type']);
