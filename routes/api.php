@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
     Route::get('/getAdminDashboardOverview', [AdminController::class, 'getAdminDashboardOverview']);
     Route::get('/getInquiriesAdmin', [InquiryController::class, 'getInquiriesAdmin']);
+     Route::post('/setInquiryState', [InquiryController::class, 'setInquiryState']);
 });
 
 Route::prefix('media')->group(function () {
@@ -35,6 +36,7 @@ Route::prefix('cta-interaction')->group(function () {
 
 Route::prefix('inquiry')->group(function () {
     Route::post('/addInquiry', [InquiryController::class, 'addInquiry']);
+    
 });
 
 
