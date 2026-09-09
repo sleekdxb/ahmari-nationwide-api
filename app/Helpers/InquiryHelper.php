@@ -107,5 +107,79 @@ class InquiryHelper
             ], 500);
         }
     }
+
+
+
+    public static function setInquiryState(Request $request): JsonResponse
+{
+try {
+
+    return DB::transaction(function () use ($request) {
+
+        /*
+         * 1. Find the inquiry using inq_id
+         */
+        $inquiry = Inquiry::where(
+            'inq_id',
+            $request->inq_id
+        )->first();
+
+        if (!$inquiry) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Inquiry not found.'
+            ], 404);
+        }
+
+        /*
+         * 2. Generate unique state ID
+         *
+         * Example:
+         * STATE-A1B2C3D4E5
+         */
+        $stateId = 'STATE-' . strtoupper(
+            bin2hex(random_bytes(6))
+        );
+
+        /*
+         * 3. Create inquiry status
+         */
+        $inquiryStatus = InquiryStatus::create([
+            'inq_id'   => $request->inq_id,
+            'state_id' => $stateId,
+            'name'     => $request->name,
+        ]);
+
+        /*
+         * 4. Update the current inquiry state_id
+         */
+        $inquiry->state_id = $stateId;
+        $inquiry->save();
+
+        /*
+         * 5. Return successful response
+         */
+        return response()->json([
+            'success' => true,
+            'message' => 'Inquiry state added successfully.',
+
+            'data' => [
+                'inq_id'   => $inquiry->inq_id,
+                'state_id' => $stateId,
+                'name'     => $inquiryStatus->name,
+            ]
+        ], 201);
+    });
+
+} catch (\Exception $e) {
+
+    return response()->json([
+        'success' => false,
+        'message' => 'Failed to add inquiry state.',
+        'error'   => $e->getMessage()
+    ], 500);
+}
+
+}
 }
 
