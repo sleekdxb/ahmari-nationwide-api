@@ -86,6 +86,8 @@ class AdminAuthHelper
 
             //  Generate JWT (SAFE way)
             $token = JWTAuth::fromUser($admin);
+            // Get the actual JWT expiration time 
+            $expiresAt = now()->addMinutes( JWTAuth::factory()->getTTL() );
 
             if (!$token) {
                 return response()->json([

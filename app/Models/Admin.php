@@ -36,15 +36,18 @@ class Admin extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Get the identifier that will be stored in the JWT subject claim.
+     * JWT subject identifier.
+     *
+     * The admins table uses "id" as the primary key,
+     * so JWTAuth will store that ID in the "sub" claim.
      */
     public function getJWTIdentifier()
     {
-        return $this->admin_id;
+        return $this->getKey();
     }
 
     /**
-     * Get custom claims for the JWT.
+     * Custom JWT claims.
      */
     public function getJWTCustomClaims()
     {
@@ -60,4 +63,3 @@ class Admin extends Authenticatable implements JWTSubject
         );
     }
 }
-
