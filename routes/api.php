@@ -9,43 +9,98 @@ use App\Http\Controllers\CtaInteractionController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AdminController;
 
-Route::prefix('vehicle')->group(function () {
-    Route::post('/addVehicle', [VehicleController::class, 'addVehicle']);
-    Route::put('/updateVehicle', [VehicleController::class, 'updateVehicle']);
-    Route::put('/setVehicleStatus', [VehicleController::class, 'setVehicleStatus']);
-    Route::delete('/deleteVehicle', [VehicleController::class, 'deleteVehicle']);
-    Route::get('/filterVehicle', [VehicleController::class, 'filterVehicle']);
 
-});
+Route::prefix('vehicle')
+    ->middleware('verify.token')
+    ->group(function () {
 
+        // 30 requests/minute
+        Route::post('/addVehicle', [VehicleController::class, 'addVehicle'])
+            ->middleware('throttle:vehicle-write');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory']);
-    Route::get('/getAdminDashboardOverview', [AdminController::class, 'getAdminDashboardOverview']);
-    Route::get('/getInquiriesAdmin', [InquiryController::class, 'getInquiriesAdmin']);
-     Route::post('/setInquiryState', [InquiryController::class, 'setInquiryState']);
-});
+        // 30 requests/minute
+        Route::put('/updateVehicle', [VehicleController::class, 'updateVehicle'])
+            ->middleware('throttle:vehicle-write');
 
-Route::prefix('media')->group(function () {
-    Route::post('/vehicleFileUpload', [MediaController::class, 'vehicleFileUpload']);
-});
+        // 30 requests/minute
+        Route::put('/setVehicleStatus', [VehicleController::class, 'setVehicleStatus'])
+            ->middleware('throttle:vehicle-write');
 
-Route::prefix('cta-interaction')->group(function () {
-    Route::post('/setInteraction', [CtaInteractionController::class, 'setInteraction']);
-});
+        // 30 requests/minute
+        Route::delete('/deleteVehicle', [VehicleController::class, 'deleteVehicle'])
+            ->middleware('throttle:vehicle-write');
 
-Route::prefix('inquiry')->group(function () {
-    Route::post('/addInquiry', [InquiryController::class, 'addInquiry']);
-    
-});
+        // 60 requests/minute
+        Route::get('/filterVehicle', [VehicleController::class, 'filterVehicle'])
+            ->middleware('throttle:vehicle-read');
+    });
 
 
+Route::prefix('admin')
+    ->middleware('verify.token')
+    ->group(function () {
+
+        // 120 requests/minute
+        Route::get('/getVehicleInventory', [VehicleController::class, 'getVehicleInventory'])
+            ->middleware('throttle:admin-read');
+
+        // 120 requests/minute
+        Route::get('/getAdminDashboardOverview', [AdminController::class, 'getAdminDashboardOverview'])
+            ->middleware('throttle:admin-read');
+
+        // 120 requests/minute
+        Route::get('/getInquiriesAdmin', [InquiryController::class, 'getInquiriesAdmin'])
+            ->middleware('throttle:admin-read');
+
+        // 30 requests/minute
+        Route::post('/setInquiryState', [InquiryController::class, 'setInquiryState'])
+            ->middleware('throttle:admin-write');
+    });
+
+
+Route::prefix('media')
+    ->middleware('verify.token')
+    ->group(function () {
+
+        // 10 requests/minute
+        Route::post('/vehicleFileUpload', [MediaController::class, 'vehicleFileUpload'])
+            ->middleware('throttle:upload');
+    });
+
+
+Route::prefix('cta-interaction')
+    ->middleware('verify.token')
+    ->group(function () {
+
+        // 30 requests/minute
+        Route::post('/setInteraction', [CtaInteractionController::class, 'setInteraction'])
+            ->middleware('throttle:cta');
+    });
+
+
+Route::prefix('inquiry')
+    ->middleware('verify.token')
+    ->group(function () {
+
+        // 20 requests/minute
+        Route::post('/addInquiry', [InquiryController::class, 'addInquiry'])
+            ->middleware('throttle:inquiry');
+    });
 
 
 Route::prefix('adminAuth')->group(function () {
-    Route::post('/addStaff', [AdminAuthController::class, 'addStaff']);
-    Route::post('/login', [AdminAuthController::class, 'login']);
-    Route::delete('/logout', [AdminAuthController::class, 'logout']);
+
+    // 30 requests/minute
+    Route::post('/addStaff', [AdminAuthController::class, 'addStaff'])
+        ->middleware('throttle:admin-write');
+
+    // 5 requests/minute
+    Route::post('/login', [AdminAuthController::class, 'login'])
+        ->middleware('throttle:login');
+
+    // 10 requests/minute
+    Route::delete('/logout', [AdminAuthController::class, 'logout'])
+        ->middleware('throttle:logout');
 });
 
 
