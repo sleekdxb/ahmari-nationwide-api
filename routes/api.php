@@ -30,11 +30,11 @@ Route::prefix('vehicle')
         Route::delete('/deleteVehicle', [VehicleController::class, 'deleteVehicle'])
             ->middleware('throttle:vehicle-write');
 
+       
+    });
         // 60 requests/minute
         Route::get('/filterVehicle', [VehicleController::class, 'filterVehicle'])
             ->middleware('throttle:vehicle-read');
-    });
-
 
 Route::prefix('admin')
     ->middleware('verify.token')
@@ -69,7 +69,7 @@ Route::prefix('media')
 
 
 Route::prefix('cta-interaction')
-    ->middleware('verify.token')
+    //->middleware('verify.token')
     ->group(function () {
 
         // 30 requests/minute
@@ -79,7 +79,7 @@ Route::prefix('cta-interaction')
 
 
 Route::prefix('inquiry')
-    ->middleware('verify.token')
+    //->middleware('verify.token')
     ->group(function () {
 
         // 20 requests/minute
