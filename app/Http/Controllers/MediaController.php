@@ -73,31 +73,31 @@ class MediaController extends Controller
         $target = $request->input('uploadProtocol.target');
 
         // Step 3: Validate vehicle files
-        $fileRules = [
-            'vehicle_img' => [
-                'required_without:vehicle_doc',
-                'array',
-                'min:1'
-            ],
+     $fileRules = [
+    'vehicle_img' => [
+        'required_without:vehicle_doc',
+        'array',
+        'min:1',
+    ],
 
-            'vehicle_doc' => [
-                'required_without:vehicle_img',
-                'array',
-                'min:1'
-            ],
+    'vehicle_doc' => [
+        'required_without:vehicle_img',
+        'array',
+        'min:1',
+    ],
 
-            'vehicle_img.*' => [
-                'file',
-                'mimes:jpeg,jpg,png,gif,webp,bmp,tiff,tif,svg,ico,avif,heic,heif'
-                'max:20480'
-            ],
+    'vehicle_img.*' => [
+        'file',
+        'mimes:jpeg,jpg,png,gif,webp,bmp,tiff,tif,svg,ico,avif,heic,heif',
+        'max:20480',
+    ],
 
-            'vehicle_doc.*' => [
-                'file',
-                'mimes:pdf,doc,docx',
-                'max:20480'
-            ],
-        ];
+    'vehicle_doc.*' => [
+        'file',
+        'mimes:pdf,doc,docx',
+        'max:20480',
+    ],
+];
 
         // For update, files are optional if only updating existing files
         if ($target === 'vehicle_update') {
