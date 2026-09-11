@@ -13,7 +13,7 @@ class VehicleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'admin_id' => 'required|string|exists:admins,admin_id',
-            'vin' => 'required|string',
+            'vin' => 'nullable|string',
             'year' => 'required|integer',
             'make' => 'required|string',
             'model' => 'required|string',

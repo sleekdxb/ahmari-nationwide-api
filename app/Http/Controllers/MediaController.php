@@ -88,7 +88,7 @@ class MediaController extends Controller
 
             'vehicle_img.*' => [
                 'file',
-                'mimes:jpeg,png,jpg,gif,webp',
+                'mimes:jpeg,jpg,png,gif,webp,bmp,tiff,tif,svg,ico,avif,heic,heif'
                 'max:20480'
             ],
 
